@@ -132,7 +132,7 @@ StreamSubscriptionHandle<T> subscriptionHandle = await stream.SubscribeAsync(IAs
 await subscriptionHandle.UnsubscribeAsync()
 ```
 
-또한, 스트림의 __구독__은 __grain의 수명주기와 상관없이 동작__ 됨이 중요하다.
+또한, 스트림의 __구독__ 은 __grain의 수명주기와 상관없이 동작__ 됨이 중요하다.
 
 ### 중복 구독
 스트림은 다수의 프로듀서(이벤트를 생산하는 인스턴스)와 구독자를 가질 수 있다. 프로듀서로부터 발행(Publush)된 메시지는 모든 구독자에게 전파된다. 구독자는 동일한 스트림을 중복하여 구독할 수 있는데, 만약에 grain or client가 동일한 스트림을 n번 중복하여 구독신청했다면 매 시간마다 n번의 이벤트가 전달될 것이다. 구독자는 각각의 구독 또는 현재 수신중인 모든 구독을 취소할 수 있다.
