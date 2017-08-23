@@ -18,3 +18,8 @@
 6. Advanced Features - 대기
 7. Implementation Details - 미정
 8. Samples - 안함
+
+## 번역 규칙
+1. 최대한 간결하게 번역한다.
+2. 필요없는 부분은 과감하게 생략하거나 링크를 건다.
+3. Orleans에서만 사용되는 용어는 원어로 쓴다.
