@@ -234,5 +234,17 @@ public void RegisterStreamProvider<T>(string providerName, IDictionary<string, s
 ```
 
 ## Stream Providers
+스트림은 stream provider에 따라 서로 다른 동작(이벤트 전달 방식, 캐싱 알고리즘 등)을 하게 된다. Orleans는 현재 [Simple Message Stream Provider](https://github.com/dotnet/orleans/blob/master/src/Orleans/Streams/SimpleMessageStream/SimpleMessageStreamProvider.cs), [Azure Queue Stream Provider](https://github.com/dotnet/orleans/blob/master/src/OrleansAzureUtils/Providers/Streams/AzureQueue/AzureQueueStreamProvider.cs) 두가지 기본 stream provider를 제공한다.
+
+### Simple Message Stream Provider
+SMS Provider는 TCP 프로토콜로 이벤트를 전송한다. SMS는 이벤트 전달을 보장하지 않는다. 전송에 실패해도 재전송을 하지 않는다.  
+SMS 스트림 프로듀서는 자신의 이벤트가 성공적으로 수신되어 처리됨을 알 수 있는 방법을 가지고 있다. `stream.OnNextAsync`의 반환값 `Task`는 구독자의 처리 상태를 나타내며, 실패시 프로듀서는 이를 활용하여 이벤트를 재전송할 수 있음으로 프로그램 레벨에서 안정성을 확보할 수 있다.
+
+### Azure Queue (AQ) Stream Provider
+AQ는 Azure Queue를 통해 이벤트를 전달한다.프로듀서는 Queue이벤트를 넣고 구독자는 풀링 에이전트(?)를 관리한다.
+
+### Queue Adapters
+생략
+
 ## Stream 구현하기
 ## Stream 확장하기
